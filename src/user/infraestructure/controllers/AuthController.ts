@@ -6,10 +6,10 @@ export class AuthUserControll {
 
   async run(req: Request, res: Response) {
     const data = req.body;
-    console.log(data.username);
+    console.log(data);
 
     try {
-      const userN = await this.getUserUseCase.run(data.username, data.password);
+      const userN = await this.getUserUseCase.run(data.email, data.password);
       console.log(userN);
 
       if (userN != null) {

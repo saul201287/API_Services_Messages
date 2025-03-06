@@ -48,6 +48,8 @@ export class RepositoryMysql implements UserRepository {
       const user = await this.userRepository.findOne({
         where: { email: email },
       });
+      console.log(user);
+      
       if (!user) return null;
       return new User(
         user.id!,
