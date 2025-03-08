@@ -55,8 +55,10 @@ export class MysqlProductRepository implements ProductRepository {
 
   async getAll(): Promise<Product[] | null> {
     try {
-      const products = await this.productRepository.find();
-
+      const products = await this.productRepository.find({
+        relations: ["user"],
+      });
+      
       return products.map(
         (product) =>
           new Product(

@@ -6,12 +6,20 @@ export class GetAllProductsController {
 
   async run(req: Request, res: Response) {
     try {
-        
       const products = await this.getAllProducts.run();
+
       if (products) {
+        const response = products.map((product) => ({
+          id: product.id,
+          name: product.name,
+          costo: product.costo,
+          cantidad: product.cantidad,
+          imageUrl: product.url_imagen,
+          idUser: product.id_user,
+        }));
         return res.status(200).send({
           status: "recurso obtenido",
-          data: products,
+          data: response,
         });
       } else {
         return res.status(409).send({
