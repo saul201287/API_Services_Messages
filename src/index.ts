@@ -7,6 +7,7 @@ import cors from "cors";
 import { database } from "./db/DataBase";
 import { userRouter } from "./user/infraestructure/RouterUser";
 import { productRouter } from "./product/infraestructure/RouterProduct";
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -19,7 +20,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use("/user", userRouter);
 app.use("/product", productRouter);
-
+app.use("/upload", express.static(path.join(__dirname, "../upload")));
 app.get("/", (req, res) => {
   res.send("API is running");
 });
