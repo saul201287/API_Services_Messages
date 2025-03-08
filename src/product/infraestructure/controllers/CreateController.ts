@@ -13,12 +13,38 @@ export class CreateProductController {
 
     if (data.url_imagen) {
       try {
-        const base64Data = data.url_imagen.includes(";base64,")
-          ? data.url_imagen.split(";base64,").pop()
-          : data.url_imagen;
+        let mimeType = "";
+        let base64Data = "";
 
-        const filename = `product_${Date.now()}.png`;
+        if (data.url_imagen.includes(";base64,")) {
+          const parts = data.url_imagen.split(";base64,");
+          const mimeTypePart = parts[0];
+          base64Data = parts[1];
 
+          if (mimeTypePart.includes("data:")) {
+            mimeType = mimeTypePart.split("data:")[1];
+          }
+        } else {
+          base64Data = data.url_imagen;
+        }
+
+        let fileExtension = ".png"; 
+
+        if (mimeType) {
+          const extensionMap: { [key: string]: string } = {
+            "image/jpeg": ".jpg",
+            "image/jpg": ".jpg",
+            "image/png": ".png",
+            "image/gif": ".gif",
+            "image/webp": ".webp",
+            "image/svg+xml": ".svg",
+          };
+
+          fileExtension =
+            extensionMap[mimeType] || "." + mimeType.split("/")[1] || ".png";
+        }
+
+        const filename = `product_${Date.now()}${fileExtension}`;
         const uploadDir = path.join(process.cwd(), "upload");
 
         if (!fs.existsSync(uploadDir)) {
@@ -26,7 +52,6 @@ export class CreateProductController {
         }
 
         const filePath = path.join(uploadDir, filename);
-
         fs.writeFileSync(filePath, base64Data, { encoding: "base64" });
 
         imageUrl = `/upload/${filename}`;
@@ -45,7 +70,7 @@ export class CreateProductController {
       data.name,
       data.costo,
       data.cantidad,
-      imageUrl, 
+      imageUrl,
       data.id_user
     );
 
