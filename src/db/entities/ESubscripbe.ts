@@ -8,28 +8,19 @@ import {
 import { EUser } from "./EUser";
 import { EProduct } from "./EProduct";
 
-@Entity("shopping")
+@Entity("suscripcions")
 export class EShopping {
   @PrimaryGeneratedColumn()
   id?: number;
 
   @Column({ type: "varchar", length: 255 })
-  name?: string;
+  topic?: string;
 
-  @Column({ type: "double" })
-  total?: number;
-
-  @Column()
-  cantidad?: number;
-
-  @Column({ type: "varchar", length: 255 })
-  url_imagen?: string;
+  @Column({ type: "boolean" })
+  status?: boolean;
 
   @ManyToOne(() => EUser, { nullable: true })
   @JoinColumn({ name: "id_user" })
   user?: EUser;
 
-  @ManyToOne(() => EProduct, { nullable: true })
-  @JoinColumn({ name: "id_product" })
-  product?: EProduct; 
 }

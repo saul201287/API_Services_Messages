@@ -49,7 +49,7 @@ export class RepositoryMysql implements UserRepository {
         where: { email: email },
       });
       console.log(user);
-      
+
       if (!user) return null;
       return new User(
         user.id!,
@@ -85,6 +85,32 @@ export class RepositoryMysql implements UserRepository {
     } catch (error) {
       console.error("Error: " + error);
       return null;
+    }
+  }
+  async subscribe(
+    id: number,
+    token: string,
+    id_divece: string
+  ): Promise<boolean> {
+    try {
+      const user = await this.userRepository.findOne({
+        where: { id: id },
+      });
+      if (!user) {
+        console.log("no se encontro el usuario con el id proporcionado");
+
+        return false;
+      }
+
+      user.token = token;
+      user.id_divece = id_divece;
+
+      const updateUser = await this.userRepository.save(user);
+
+      return true;
+    } catch (error) {
+      console.log("Error al actualizar el gimnasio: " + error);
+      return false;
     }
   }
 }

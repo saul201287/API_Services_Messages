@@ -4,6 +4,7 @@ export class Product {
     readonly name: string,
     readonly costo: number,
     readonly cantidad: number,
-    readonly url_imagen: string
+    readonly url_imagen: string,
+    readonly id_user:number
   ) {}
 }

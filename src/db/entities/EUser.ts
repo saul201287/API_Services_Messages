@@ -25,6 +25,9 @@ export class EUser {
   @Column({ type: "varchar", length: 255 })
   id_divece?: string;
 
+  @Column({ type: "varchar", length: 255 })
+  token?: string;
+
   @OneToMany(() => EProduct, (product) => product.user)
   products?: EProduct[];
 

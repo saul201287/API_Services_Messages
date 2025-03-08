@@ -7,7 +7,7 @@ export class AuthUseCase {
     private readonly encrypt: IEncrypt
   ) {}
 
-  async run(user: string, password: string): Promise<string | null> {
+  async run(user: string, password: string): Promise<number | null> {
     try {
       const userN = await this.userRepository.auth(user, password);
 
@@ -18,10 +18,9 @@ export class AuthUseCase {
         );
         if (!isPasswordCorrect) {
           console.log("error");
-
           return null;
         }
-        return userN.id_divece;
+        return userN.id;
       }
       return null;
     } catch (error) {

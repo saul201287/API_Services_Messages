@@ -6,15 +6,19 @@ import helmet from "helmet";
 import cors from "cors";
 import { database } from "./db/DataBase";
 import { userRouter } from "./user/infraestructure/RouterUser";
+import { productRouter } from "./product/infraestructure/RouterProduct";
 
 dotenv.config();
 const app = express();
+app.use(express.json({ limit: "30mb" })); 
+app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(helmet.hidePoweredBy());
 app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
 
 app.use(express.json());
-app.use("/user",userRouter)
+app.use("/user", userRouter);
+app.use("/product", productRouter);
 
 app.get("/", (req, res) => {
   res.send("API is running");
@@ -39,4 +43,4 @@ async function startServer() {
   }
 }
 
-startServer(); 
+startServer();

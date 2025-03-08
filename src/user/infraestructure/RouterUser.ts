@@ -1,5 +1,10 @@
 import express from "express";
-import { createUserController, authUserController, getAllController } from "./Dependecies";
+import {
+  createUserController,
+  authUserController,
+  getAllController,
+  subscribeController,
+} from "./Dependecies";
 
 export const userRouter = express.Router();
 
@@ -27,6 +32,17 @@ userRouter.post("/login", (req, res) => {
 
 userRouter.get("/", (req, res) => {
   getAllController
+    .run(req, res)
+    .then((user) => {
+      return user;
+    })
+    .catch((err) => {
+      res.status(500).send({ error: err.message, msg: "Error en el servidor" });
+    });
+});
+
+userRouter.put("/", (req, res) => {
+  subscribeController
     .run(req, res)
     .then((user) => {
       return user;
