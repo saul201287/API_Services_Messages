@@ -14,7 +14,6 @@ export class AuthUserControll {
 
       if (userN != null) {
         res.locals.user = userN;
-        //next();
         res.status(200).json({
           messages: "Credenciales validas",
           data: userN,

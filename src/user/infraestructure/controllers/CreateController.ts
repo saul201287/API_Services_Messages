@@ -11,8 +11,8 @@ export class CreateUserController {
       0,
       data.nombre,
       data.apellidos,
-      data.password,
       data.email,
+      data.password,
       data.tipo_user,
       ""
     );

@@ -1,3 +1,4 @@
+import { User } from "../domain/User";
 import { UserRepository } from "../domain/UserRepository";
 import { IEncrypt } from "./services/IEncrypt";
 
@@ -7,7 +8,7 @@ export class AuthUseCase {
     private readonly encrypt: IEncrypt
   ) {}
 
-  async run(user: string, password: string): Promise<number | null> {
+  async run(user: string, password: string): Promise<User | null> {
     try {
       const userN = await this.userRepository.auth(user, password);
 
@@ -20,7 +21,7 @@ export class AuthUseCase {
           console.log("error");
           return null;
         }
-        return userN.id;
+        return userN
       }
       return null;
     } catch (error) {
