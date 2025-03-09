@@ -8,13 +8,16 @@ import {
 import { EUser } from "./EUser";
 import { EProduct } from "./EProduct";
 
-@Entity("suscripcions")
-export class EShopping {
+@Entity("subscripcions")
+export class ESubscribe {
   @PrimaryGeneratedColumn()
   id?: number;
 
   @Column({ type: "varchar", length: 255 })
   topic?: string;
+
+  @Column({ type: "varchar", length: 255 })
+  tipo?: string;
 
   @Column({ type: "boolean" })
   status?: boolean;
@@ -23,4 +26,7 @@ export class EShopping {
   @JoinColumn({ name: "id_user" })
   user?: EUser;
 
+  @ManyToOne(() => EProduct, { nullable: true })
+  @JoinColumn({ name: "id_product" })
+  product?: EProduct;
 }

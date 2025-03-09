@@ -11,13 +11,13 @@ export class CreateProductController {
     const data = req.body;
     let imageUrl = "";
 
-    if (data.url_imagen) {
+    if (data.imageUrl) {
       try {
         let mimeType = "";
         let base64Data = "";
 
-        if (data.url_imagen.includes(";base64,")) {
-          const parts = data.url_imagen.split(";base64,");
+        if (data.imageUrl.includes(";base64,")) {
+          const parts = data.imageUrl.split(";base64,");
           const mimeTypePart = parts[0];
           base64Data = parts[1];
 
@@ -25,7 +25,7 @@ export class CreateProductController {
             mimeType = mimeTypePart.split("data:")[1];
           }
         } else {
-          base64Data = data.url_imagen;
+          base64Data = data.imageUrl;
         }
 
         let fileExtension = ".png"; 

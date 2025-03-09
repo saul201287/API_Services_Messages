@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { EUser } from "./EUser";
 import { EShopping } from "./EShopping";
+import { ESubscribe } from "./ESubscripbe";
 
 @Entity("products")
 export class EProduct {
@@ -32,4 +33,7 @@ export class EProduct {
   @ManyToOne(() => EUser, { nullable: true })
   @JoinColumn({ name: "id_user" })
   user?: EUser;
+
+  @OneToMany(() => ESubscribe, (subscribe) => subscribe.product)
+    subscribe?: ESubscribe[];
 }

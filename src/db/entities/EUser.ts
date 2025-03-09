@@ -1,6 +1,7 @@
 import { Entity, PrimaryColumn, Column, UpdateDateColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { EProduct } from "./EProduct";
 import { EShopping } from "./EShopping";
+import { ESubscribe } from "./ESubscripbe";
 
 @Entity("users")
 export class EUser {
@@ -33,4 +34,7 @@ export class EUser {
 
   @OneToMany(() => EShopping, (shopping) => shopping.user)
   shopping?: EShopping[];
+
+  @OneToMany(() => ESubscribe, (subscribe) => subscribe.user)
+  subscribe?: ESubscribe[];
 }
