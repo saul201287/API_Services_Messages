@@ -5,5 +5,5 @@ export interface IMessages {
     title: string,
     body: string
   ): Promise<string | null>;
-  SendStok(topic: string, title: string, body: string): Promise<boolean>;
+  SendStok(tokens: string[], title: string, body: string): Promise<boolean>;
 }

@@ -11,18 +11,24 @@ export class UpdateProductUseCase {
     try {
       const productNew = await this.productRepository.update(id, cantidad);
 
-      if (typeof productNew != null) {
+      if (productNew != null) {
         if (
-          await this.services.run(
-            "add-products",
-            "¡El producto que esperabas ya esta disponible!",
-            `Se han añadido mas ${productNew} al Stok.`
-          )
+          productNew.tokens.length > 0 &&
+          productNew.producto.cantidad == cantidad
         ) {
-          return productNew;
-        } else {
-          return null;
+          if (
+            await this.services.run(
+              productNew.tokens,
+              "¡El producto que esperabas ya esta disponible!",
+              `Se han añadido mas ${productNew.producto.name} al Stok.`
+            )
+          ) {
+            return productNew.producto.name;
+          }else{
+            return null
+          }
         }
+        return productNew.producto.name;
       } else {
         return null;
       }
