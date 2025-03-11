@@ -35,5 +35,5 @@ export class EProduct {
   user?: EUser;
 
   @OneToMany(() => ESubscribe, (subscribe) => subscribe.product)
-    subscribe?: ESubscribe[];
+  subscribe?: ESubscribe[];
 }

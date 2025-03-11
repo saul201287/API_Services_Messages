@@ -22,11 +22,14 @@ export class ESubscribe {
   @Column({ type: "boolean" })
   status?: boolean;
 
-  @ManyToOne(() => EUser, { nullable: true })
+  @Column({ type: "varchar", length: 35, nullable: true })
+  estado?: string;
+
+  @ManyToOne(() => EUser, (user) => user.subscribe, { nullable: true })
   @JoinColumn({ name: "id_user" })
   user?: EUser;
 
-  @ManyToOne(() => EProduct, { nullable: true })
+  @ManyToOne(() => EProduct, (product) => product.subscribe, { nullable: true })
   @JoinColumn({ name: "id_product" })
   product?: EProduct;
 }

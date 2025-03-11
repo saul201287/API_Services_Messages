@@ -4,6 +4,7 @@ export class Subscripcion {
     readonly topic: string,
     readonly tipo: string,
     readonly status: boolean,
+    readonly estado:string,
     readonly id_user: number,
     readonly id_product: number
   ) {}
