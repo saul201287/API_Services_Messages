@@ -7,8 +7,7 @@ export class ServicesFireBase implements IMessages {
       const message = {
         notification: { title, body },
         data: { triggerIAM: "true" },
-        token:
-          "dmhPpnl9S_e1iNXb4OXP80:APA91bFeNk-7BxdMjXEw2G4IFVemFH7ttJ8hhZTzQqNw7byMri2OeiFTRmzgHPlV_hnarQleUh94BZrWiAouWEIDk3zti0exJ0Ltu756lYl7BrlWUhJvJDo",
+        topic:topic,
       };
 
       const result = await admin.messaging().send(message);
